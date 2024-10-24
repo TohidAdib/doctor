@@ -1,0 +1,61 @@
+.auto_visit{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    padding: 1.3rem;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #888888ad;
+    margin-bottom: 25px 0;
+}
+
+.lab_inp{
+    padding: 5px;
+    flex: 1;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-dv-lg{
+    border: 3px solid #999;
+    border-bottom: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.admin-t_head{
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    background-color: aliceblue;
+    justify-content: space-evenly;
+    padding: 4px;
+}
+.admin-t_body{
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    justify-content: space-evenly;
+    border-bottom: 1px solid #ccc;
+    padding: 4px;
+}
+.admin-t_body:last-child{
+    border-bottom: 0;
+}
+.admin-t_td,.admin-t_th{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+input{
+    border: 1px solid #555;
+    padding: 3px;
+    border-radius: 5px;
+}
