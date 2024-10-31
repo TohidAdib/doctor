@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import Footer from "./footer";
+import Header from "./header"
 import "../components/static/css/main.css";
 const Main = () => {
   return (
     <>
+      <Header/>
       <main>
         <section>
           <div className="box box1">
