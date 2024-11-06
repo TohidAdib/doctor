@@ -1,0 +1,24 @@
+<section class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>نام بیمار</th>
+        <th>کد ملی بیمار</th>
+        <th>نام پدر بیمار</th>
+        <th>تاریخ مراجعه</th>
+        <th>زمان مراجعه</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (u of user; track u) {
+      <tr>
+        <td scope="row">{{ u.name }}</td>
+        <td>{{ u.national_id }}</td>
+        <td>{{ u.father_name }}</td>
+        <td>{{ u.visit_date ? toJalali(u.visit_date) : "_____" }}</td>
+        <td>{{ u.visit_time ?? "_____" }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</section>

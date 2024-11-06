@@ -1,0 +1,46 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="my-3 p-2 form-group">
+        <label class="my-2" for="name">نام بیمار:</label>
+        <input required class="form-control" id="name" type="text" name="name" ngModel #name="ngModel">
+        @if (name.invalid && name.touched) {
+            @if (name.hasError('required')) {
+                <div class="alert alert-danger my-2">این فیلد اجباری است</div>
+            }
+        }
+    </div>
+    <div class="my-3 p-2 form-group">
+        <label class="my-2" for="nationalID">کد ملی بیمار:</label>
+        <input minlength="10" maxlength="10" required class="form-control" id="nationalID" type="text" name="national_id" ngModel #nationalID="ngModel">
+        @if (nationalID.invalid && nationalID.touched) {
+            @if (nationalID.hasError('required')) {
+                <div class="alert alert-danger my-2">این فیلد اجباری است</div>
+            }
+            @if (nationalID.hasError('minlength')) {
+                <div class="alert alert-danger my-2">کد ملی باید ده رقم باشد</div>
+            }
+        }
+    </div>
+    <div class="my-3 p-2 form-group">
+        <label class="my-2" for="fatherName">نام پدر بیمار:</label>
+        <input required class="form-control" id="fatherName" type="text" name="father_name" ngModel #fatherName="ngModel">
+        @if (fatherName.invalid && fatherName.touched) {
+            @if (fatherName.hasError('required')) {
+                <div class="alert alert-danger my-2">این فیلد اجباری است</div>
+            }
+        }
+    </div>
+    <div class="my-3 p-2 form-group">
+        <label class="my-2" for="email">ایمیل:</label>
+        <input placeholder="اختیاری" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" id="email" type="email" name="email" ngModel #email="ngModel">
+        @if (email.invalid && email.touched) {
+            @if (email.hasError('pattern')) {
+                <div class="alert alert-danger my-2">فرمت ایمیل صحیح نمی باشد</div>
+            }
+        }
+    </div>
+    <div class="my-3 p-2 form-group">
+        <label class="my-2" for="description">توضیحات:</label>
+        <textarea  placeholder="اختیاری" class="form-control" id="description" name="description" ngModel #description="ngModel"></textarea>
+    </div>
+    <div class="my-3 p-2 text-center"><button class="btn btn-outline-success" [disabled]="f.invalid || sending">{{sending ? "در حال ارسال ..." : "ارسال"}}</button></div>
+</form>

@@ -1,0 +1,151 @@
+<form (ngSubmit)="onSunmitAutoVisit(f)" #f="ngForm" class="w-100 autoVisitSec">
+  <ng-persian-datepicker>
+    <label class="my-1" for="pickdate">تاریخ:</label>
+    <input
+      placeholder="تاریخ"
+      id="pickdate"
+      class="form-control"
+      type="text"
+      [formControl]="dateValue"
+      required
+    />
+  </ng-persian-datepicker>
+  <div>
+    <label class="my-1" for="from_time">از ساعت:</label>
+    <input
+      id="from_time"
+      class="form-control"
+      type="time"
+      name="from_time"
+      ngModel
+      #fromTime="ngModel"
+      placeholder="از ساعت"
+      step="2"
+      required
+    />
+  </div>
+  <div>
+    <label class="my-1" for="to_time">تا ساعت:</label>
+    <input
+      id="to_time"
+      class="form-control"
+      type="time"
+      name="to_time"
+      ngModel
+      #toTime="ngModel"
+      placeholder="تا ساعت"
+      step="2"
+      required
+    />
+  </div>
+  <div>
+    <label class="my-1" for="for_time">به مدت:</label>
+    <input
+      id="for_time"
+      class="form-control"
+      type="time"
+      name="for_time"
+      ngModel
+      #forTime="ngModel"
+      placeholder="به مدت"
+      step="2"
+      required
+    />
+  </div>
+  <div class="text-center">
+    <label class="my-4 d-block"></label>
+    <button [disabled]="sendeing || f.invalid" class="btn btn-primary">
+      ثبت
+    </button>
+  </div>
+  <div *ngIf="massage" class="w-100 my-3 text-center text-dark">
+    {{ massage }}
+  </div>
+</form>
+
+<section class="my-5 phisicalVisitSec">
+  <div class="text-center w-100">
+    <input
+      class="form-control w-25 m-4"
+      type="search"
+      placeholder="جستو جو"
+      (input)="onSearch($event)"
+    />
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>نام بیمار</th>
+        <th>کد ملی بیمار</th>
+        <th>نام پدر بیمار</th>
+        <th>تاریخ مراجعه</th>
+        <th>زمان مراجعه</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (patient of patients; track patient) {
+      <tr class="admin-t_body">
+        <td scope="row">{{ patient.name }}</td>
+        <td class="na_id">{{ patient.national_id }}</td>
+        <td>{{ patient.father_name }}</td>
+        <td>
+          <span>
+            <ng-persian-datepicker>
+              <input
+                placeholder="تاریخ"
+                id="pickdate"
+                class="form-control"
+                type="text"
+                [formControl]="dateValuePhi"
+                required
+                [(ngModel)]="phisicalVisitDATA.visit_date"
+              />
+            </ng-persian-datepicker>
+          </span>
+          <span class="my-1">{{
+            patient.visit_date ? toJalali(patient.visit_date) : "_____"
+          }}</span>
+        </td>
+        <td>
+          <span>
+            <input
+              id="time"
+              class="form-control"
+              type="time"
+              name="visit_time"
+              ngModel
+              #forTime="ngModel"
+              placeholder="به مدت"
+              step="2"
+              required
+              [(ngModel)]="phisicalVisitDATA.visit_time"
+            />
+          </span>
+          <span class="my-1">
+            {{ patient.visit_time ?? "_____" }}
+          </span>
+        </td>
+        <td>
+          <button
+            (click)="
+              onClickPhisicalVisit(
+                patient.id,
+                patient.name,
+                patient.national_id,
+                patient.father_name,
+                patient.description,
+                patient.email
+              )
+            "
+            class="btn btn-primary"
+            [disabled]="phisicalSendeing"
+          >
+            ثبت
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</section>

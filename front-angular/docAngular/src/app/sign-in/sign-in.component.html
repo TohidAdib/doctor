@@ -1,0 +1,79 @@
+<form class="container my-5" (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <!-- Username Field -->
+    <div class="form-group my-3 w-50">
+      <label for="username">نام کاربری:</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        ngModel
+        #username="ngModel"
+        class="form-control my-2"
+        required
+        minlength="8"
+      />
+      <div *ngIf="username.invalid && username.touched">
+        <div *ngIf="username.errors?.['required']" class="alert alert-danger my-1">
+          نام کاربری خود را وارد کنید
+        </div>
+        <div *ngIf="username.errors?.['minlength']" class="alert alert-danger my-1">
+          نام کاربری حداقل باید هشت کاراکتر داشته باشد
+        </div>
+      </div>
+    </div>
+  
+    <!-- Password Field -->
+    <div class="form-group my-3 w-50">
+      <label for="password">رمز عبور:</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        ngModel
+        #password="ngModel"
+        class="form-control my-2"
+        required
+        minlength="10"
+        (input)="passwordsMatch(password, confirmPassword)"
+      />
+      <div *ngIf="password.invalid && password.touched">
+        <div *ngIf="password.errors?.['required']" class="alert alert-danger my-1">
+          رمز عبور خود را وارد کنید
+        </div>
+        <div *ngIf="password.errors?.['minlength']" class="alert alert-danger my-1">
+          رمز عبور حداقل باید ده کاراکتر داشته باشد
+        </div>
+      </div>
+    </div>
+  
+    <!-- Confirm Password Field -->
+    <div class="form-group my-3 w-50">
+      <label for="confirm_password">تکرار رمز عبور:</label>
+      <input
+        type="password"
+        name="password2"
+        id="confirm_password"
+        ngModel
+        #confirmPassword="ngModel"
+        class="form-control my-2"
+        required
+        (input)="passwordsMatch(password, confirmPassword)"
+      />
+      <div *ngIf="confirmPassword.invalid && confirmPassword.touched">
+        <div *ngIf="confirmPassword.errors?.['required']" class="alert alert-danger my-1">
+          تکرار رمز عبور خود را وارد کنید
+        </div>
+      </div>
+      <div *ngIf="!isValidPass && confirmPassword.touched" class="alert alert-danger my-1">
+        پسوردها با یکدیگر تطابق ندارند
+      </div>
+    </div>
+      <button
+      [disabled]="f.invalid || sending || !isValidPass"
+      type="submit"
+      class="btn btn-lg btn-primary my-3"
+    >
+      {{ sending ? "در حال ارسال ..." : "ارسال" }}
+    </button>
+  </form>
+  

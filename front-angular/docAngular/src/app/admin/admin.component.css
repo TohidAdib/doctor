@@ -1,0 +1,17 @@
+.autoVisitSec{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #cccccc4b;
+    padding: 1.2rem;
+}
+
+td,th{
+    text-align: center;
+}
+
+.phisicalVisitSec{
+    height: 500px;
+    overflow: auto;
+}

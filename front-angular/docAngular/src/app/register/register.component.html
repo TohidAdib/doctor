@@ -1,0 +1,11 @@
+<header>
+  @if (token) {
+  <a class="btn btn-danger p-1" routerLink="register/logout">خروج</a>
+  @if (isAdmin) {
+    <a class="btn btn-success p-1" routerLink="admin">پنل ادمین</a>
+  }
+  }@else {
+  <a class="link" routerLink="register/login">ورود</a>
+  <a class="link" routerLink="register/signin">ثبت نام</a>
+  }
+</header>

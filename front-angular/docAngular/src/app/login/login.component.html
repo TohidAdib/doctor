@@ -1,0 +1,38 @@
+<form class="container my-5" (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="form-group my-3 w-50">
+    <label for="username">نام کاربری:</label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      ngModel
+      #username="ngModel"
+      type="text"
+      class="form-control my-2"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      required
+    />
+    @if (username.invalid && username.touched) { @if
+    (username.hasError('required')) {
+    <div class="alert alert-danger my-1">نام کاربری خود را وارد کنید</div>
+    } }
+  </div>
+  <div class="form-group my-3 w-50">
+    <label for="password">رمز عبور:</label>
+    <input
+      type="password"
+      name="password"
+      class="form-control my-2"
+      id="password"
+      ngModel
+      #password="ngModel"
+      required
+    />
+    @if (password.invalid && password.touched) { @if
+    (password.hasError('required')) {
+    <div class="alert alert-danger my-1">رمز عبور خود را وارد کنید</div>
+    } }
+  </div>
+  <button [disabled]="f.invalid || sending" type="submit" class="btn btn-lg btn-primary my-3">{{sending ? "در حال ارسال ..." : "ارسال"}}</button>
+</form>
