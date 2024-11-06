@@ -8,6 +8,7 @@ import { TakeVisitFormComponent } from './take-visit-form/take-visit-form.compon
 import { TakevisitshowComponent } from './takevisitshow/takevisitshow.component';
 import { TakevisitedshowComponent } from './takevisitedshow/takevisitedshow.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminGuard } from './services/auth-admin.service';
 
 const getRoutes = (): Routes => {
   const token = localStorage.getItem('token');
@@ -17,9 +18,9 @@ const getRoutes = (): Routes => {
     { path: 'takevisit', component: TakeVisitFormComponent },
     { path: 'takevisitshow', component: TakevisitshowComponent },
     { path: 'takevisitedshow', component: TakevisitedshowComponent },
-    { path: 'admin', component: AdminComponent },
+    { path: 'admin', component: AdminComponent,canActivate:[AdminGuard] }
   ];
-
+ 
   const tokenNotExistRoute = [
     { path: 'register', component: RegisterComponent },
     { path: 'register/login', component: LoginComponent },

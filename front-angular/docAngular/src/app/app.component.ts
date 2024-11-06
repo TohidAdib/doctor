@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import axiosInstance from './axios/axiosinstance';
 import { RegisterComponent } from './register/register.component';
-
+import { AuthService } from './services/row-data.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -12,13 +12,9 @@ import { RegisterComponent } from './register/register.component';
 })
 export class AppComponent implements OnInit {
   patient: any;
-
-  async ngOnInit() {
-    try {
-      const response = await axiosInstance.get('allpatient/');
-      this.patient = response.data;
-    } catch (error) {
-      return;
-    }
+  isAdmin:boolean=false
+  constructor(private authService: AuthService) {}
+  ngOnInit() {
+    this.authService.loadAdminStatus();
   }
 }

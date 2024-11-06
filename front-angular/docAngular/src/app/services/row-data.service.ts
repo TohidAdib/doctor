@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
-import axiosInstance from "../axios/axiosinstance.js"
+import axiosInstance from '../axios/axiosinstance';
 @Injectable({
   providedIn: 'root'
 })
-export class RowDataService {
-  patient:any
-  constructor() {
-    const fetchData = async ()=>{
-      try {
-        const response = await axiosInstance.get("allpatient/")
-        this.patient = response.data
-      } catch (error) {
-        return
-      }
-    }
-    fetchData()
-   }
+export class AuthService {
+  private isAdmin: boolean = false;
+  private isAdminLoaded: boolean = false;
 
+  async loadAdminStatus(): Promise<void> {
+    try {
+      const response = await axiosInstance.get("user/");
+      this.isAdmin = response.data.is_staff;
+      this.isAdminLoaded = true;
+    } catch (error) {
+      console.error("Error loading admin status:", error);
+    }
+  }
+
+  getAdminStatus(): boolean {
+    return this.isAdmin;
+  }
+
+  isStatusLoaded(): boolean {
+    return this.isAdminLoaded;
+  }
 }
